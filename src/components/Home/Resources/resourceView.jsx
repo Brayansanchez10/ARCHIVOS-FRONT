@@ -296,6 +296,16 @@ export default function ResourceView() {
     return "";
   };
 
+  const getPdfEmbedUrl = (url) => {
+    return `https://drive.google.com/viewerng/viewer?embedded=true&url=${encodeURIComponent(url)}`;
+  };
+  // Funcion para detectar si el dispositivo es móvil 
+  const isMobileDevice = () => {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    );
+  };
+
   const handleVideoEnd = () => {
     setIsContentCompleted(true);
   };
@@ -320,10 +330,11 @@ export default function ResourceView() {
           </div>
         );
       } else if (file.endsWith(".pdf")) {
+        const pdfUrl = isMobileDevice() ? getPdfEmbedUrl(file) : file; // Cambiar la URL según el dispositivo
         return (
           <div className="relative w-full" style={{ paddingBottom: "45%" }}>
             <iframe
-              src={file}
+              src={pdfUrl}
               title="PDF Viewer"
               className="absolute top-0 left-0 w-full h-full"
             ></iframe>
