@@ -330,10 +330,11 @@ export default function ResourceView() {
           </div>
         );
       } else if (file.endsWith(".pdf")) {
-        const pdfUrl = isMobileDevice() ? getPdfEmbedUrl(file) : file; // Cambiar la URL según el dispositivo
+        const pdfUrl = isMobileDevice() ? getPdfEmbedUrl(file) : file;
         return (
           <div className="relative w-full" style={{ paddingBottom: "45%" }}>
             <iframe
+              key={pdfUrl} // Cambia la clave cuando cambie el archivo
               src={pdfUrl}
               title="PDF Viewer"
               className="absolute top-0 left-0 w-full h-full"
