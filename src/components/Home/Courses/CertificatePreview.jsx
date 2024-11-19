@@ -165,16 +165,23 @@ export default function CertificatePreview() {
                 </div>
               ) : certificatePreview ? (
                 <div className="w-full h-full flex items-center justify-center bg-white relative overflow-hidden">
+                  {/* Versión móvil: embed */}
+                  <embed
+                    src={`${certificatePreview}#toolbar=0&navpanes=0&scrollbar=0&view=FitV`}
+                    type="application/pdf"
+                    className="md:hidden w-full h-full"
+                  />
+                  
+                  {/* Versión desktop: iframe */}
                   <iframe
                     src={`${certificatePreview}#toolbar=0&navpanes=0&scrollbar=0&view=FitV`}
-                    className="w-full h-full certificate-iframe"
+                    className="hidden md:block w-full h-full certificate-iframe"
                     style={{
                       border: 'none',
                       overflow: 'hidden',
                       maxWidth: '100%',
                       maxHeight: '100%',
-                      resize: 'none',
-                      display: 'block'
+                      resize: 'none'
                     }}
                     frameBorder="0"
                     title="Vista previa del certificado"
